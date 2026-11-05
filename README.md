@@ -1,5 +1,5 @@
-# dsh-memory-kernel(测试版本慎用)
-
+# dsh-memory-kernel
+(测试版本慎用)
 本地记忆内核：**Markdown 真相源 + SQLite 派生层**。把对话里值得留的内容（事实 / 边界 / 技能 / 模式）抽取成结构化条目落盘——Markdown 是人能直接读改的真相源，SQLite 做派生索引；检索时四路召回 + 加权 RRF 组装出带出身的上下文；dream 负责巩固、衰减与冷存。
 
 **特性**
