@@ -1,0 +1,24 @@
+[1] root:started
+[2] apply:start — 4hde3b
+[3] lock:acquired — 4hde3b
+[4] apply:end — 4hde3b
+[5] dispose:start — 4hde3b
+[6] dispose:resources-closed — 4hde3b
+[7] dispose:lock-released — 4hde3b
+[8] apply:start — hyjxog
+[9] lock:acquired — hyjxog
+[10] apply:end — hyjxog
+[11] dispose:start — hyjxog
+[12] dispose:resources-closed — hyjxog
+[13] dispose:lock-released — hyjxog
+[14] apply:start — a07p5y
+[15] lock:acquired — a07p5y
+[16] apply:end — a07p5y
+[17] dispose:start — a07p5y
+[18] dispose:resources-closed — a07p5y
+[19] dispose:lock-released — a07p5y
+[20] all-instances-disposed: lock fully released
+[21] root:stopped
+
+结论：通过——fiber.update 先卸后启语义成立，dispose 完整跑完后新 apply 才开始；锁无自撞窗口。
+（内核侧兜底由 r159-root-lock.test.js 的「fiber 重放全流程」用例独立覆盖。）

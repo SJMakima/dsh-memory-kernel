@@ -1,0 +1,35 @@
+{
+  "name": "dsh-memory-kernel",
+  "version": "0.1.0",
+  "description": "DSH 通用记忆插件（HLD/LLD v4.10）— P0a：Markdown 真相源 + SQLite 派生层 + 四路召回 + 加权 RRF",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./pure": "./src/pure/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "dsh-memory": "./bin/dsh-memory.js"
+  },
+  "scripts": {
+    "test": "node --test && node scripts/check-facade.mjs",
+    "demo": "node examples/demo.js",
+    "cli": "node bin/dsh-memory.js",
+    "eval": "node eval/run.js",
+    "eval:privacy": "node eval/privacy.js",
+    "sync:dsh": "node scripts/sync-to-dsh.mjs",
+    "sync:dsh:check": "node scripts/sync-to-dsh.mjs --check",
+    "verify:release": "node scripts/verify-release.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  },
+  "optionalDependencies": {
+    "sqlite-vec": "^0.1.9",
+    "usearch": "^2.26.5"
+  },
+  "license": "MIT"
+}

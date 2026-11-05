@@ -1,0 +1,39 @@
+node_modules/
+.demo/
+.clidemo/
+.tmp/
+data/
+domains/
+cold/
+*.db
+*.db-wal
+*.db-shm
+keys/
+*.log
+
+# —— 长期记忆系统：运行时数据/凭据一律不入库（记忆内容可能含私人对话与身份信息） ——
+# 记忆/审计数据
+audit/
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.jsonl
+# 注意：*.jsonl 为全局忽略（防运行时对话流入库）。若未来要提交 jsonl 测试 fixture，用 git add -f 或在此加反例外。
+
+# 环境 / 凭据
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+
+# 本地开发
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+coverage/

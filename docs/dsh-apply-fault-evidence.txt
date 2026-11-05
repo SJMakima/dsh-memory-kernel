@@ -1,0 +1,16 @@
+[hash] deployed == repo (f2e5a449f359…) — 测试归属当前代码 ✓
+[1] scenario1: gated race — old close blocked at lock release, new apply fired into the window
+[2] gate:engaged — 旧 close 已阻塞在锁释放前一步——竞态窗口打开
+[3] window:lock-held — 竞态窗口内锁仍被旧实例持有
+[4] race:rejected-in-window — 新 apply 被拒：Memory Root 正被另一个进程写入（单写者契约 R-159）：
+  root: <tmpdir>/fake-deploy
+[5] window:old-lock-untouched — 被拒路径未动旧锁（fail-closed 无副作用）
+[6] wait:fiber1-pending-before-release — gate 阻塞期间 fiber1 保持未落定——cordis 等待异步 close 的强断言通过
+[7] gate:released-close-done — gate 释放 → 旧 close 完成 → 锁消失；await fiber1 落定 = cordis 确实等待了被 gate 阻塞的异步 close（R-159.4 直接证据）
+[8] apply:recovered-after-window — 窗口关闭后同 root 重新 apply 成功
+[9] scenario2: apply with webServer.register failure
+[10] webfault:fiber-rejected — injected: webServer.register failed mid-apply
+[11] lock:released-after-webfault — webServer 失败同样经 effect 完整回收
+[12] final:lock-released
+
+结论：通过——竞态窗口（旧 close 阻塞在锁释放）内新 apply 被 root-lock fail-closed 拒绝且不动旧锁；gate 释放后旧 close 完成、cordis 落定、新 apply 成功；webServer 失败同路径回收；最终不遗留持锁者。

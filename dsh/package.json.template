@@ -1,0 +1,28 @@
+{
+  "name": "dsh-memory-kernel",
+  "version": "0.1.0",
+  "description": "DSH 长期记忆内核：Markdown 真相源 + SQLite 派生层 + 四路召回 + dream 巩固（DSH-memory-kernel-HLD-LLD-v4 的可运行实现）",
+  "type": "module",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.5",
+    "better-sqlite3": "^13.0.3",
+    "sqlite-vec": "^0.1.9"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js"
+  }
+}

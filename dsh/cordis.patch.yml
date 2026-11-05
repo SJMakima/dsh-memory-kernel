@@ -1,0 +1,12 @@
+# dsh-memory-kernel 的 loader entry。
+# config 显式给值：schemastery 3.18.x 的 .extra('volatile') + .default() 组合在缺省时
+# 会把字段解析成 {}（本地复现），所以不依赖 schema 默认值。
+# root 是 restart 类配置的语义（换库），改它 = 换记忆库，改前想清楚。
+# 发布模板不带具体机器路径：root 留空/缺省时插件取默认值 ~/.dsh/memory-kernel-dsh
+# （宿主家目录自动解析，见 dsh/lib-index.js 的 pick 兜底）；要放别处就填绝对路径。
+- insert:
+    - id: dsh-memory-kernel
+      name: dsh-memory-kernel
+      config:
+        enabled: true
+        topK: 8

@@ -1,0 +1,875 @@
+{
+  "intent": {
+    "n": 25,
+    "accuracy": 0.92,
+    "confusion": {
+      "factual→factual": 10,
+      "explanatory→explanatory": 6,
+      "explanatory→factual": 2,
+      "relational→relational": 7
+    }
+  },
+  "baseline": {
+    "label": "weighted-default（文档起步值）",
+    "n": 25,
+    "ndcgAtK": 0.3938,
+    "mrr": 0.3767,
+    "recallAtK": 0.46,
+    "runs": [
+      {
+        "query": "用户平时喝什么咖啡",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户喝不喝茶",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户爱吃辣吗",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户喜欢什么电影",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户听什么音乐",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户每周运动几次",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户养的宠物叫什么",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户住在哪个城市",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户的电脑是什么系统",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "项目代号是什么",
+        "labelIntent": "factual",
+        "predictedIntent": "factual",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "怎么给用户推荐电影",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "如何给用户安排音乐歌单",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "讲讲用户的运动习惯",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 0.4306765580733931,
+        "mrr": 0.25,
+        "recall": 1
+      },
+      {
+        "query": "给用户挑礼物有什么思路",
+        "labelIntent": "explanatory",
+        "predictedIntent": "factual",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "怎么写周报能符合用户的习惯",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "介绍一下用户的技能",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 0.9060254355346824,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "给用户做视频用什么工具好",
+        "labelIntent": "explanatory",
+        "predictedIntent": "factual",
+        "ndcg": 0.6309297535714574,
+        "mrr": 0.5,
+        "recall": 1
+      },
+      {
+        "query": "怎么回复用户才能符合要求",
+        "labelIntent": "explanatory",
+        "predictedIntent": "explanatory",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "用户和宠物之间什么关系",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "用户的作息和运动习惯有什么关系",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 0.3065735963827292,
+        "mrr": 0.3333333333333333,
+        "recall": 0.5
+      },
+      {
+        "query": "因为用户说过偏好，回复时要注意什么",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "用户的技能里哪些和数据处理相关",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 0.5706417189553201,
+        "mrr": 0.3333333333333333,
+        "recall": 1
+      },
+      {
+        "query": "用户跟团队的例会是什么时候",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      },
+      {
+        "query": "用户的居住地和习惯有联系吗",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 0,
+        "mrr": 0,
+        "recall": 0
+      },
+      {
+        "query": "上次说的边界要求都有哪些",
+        "labelIntent": "relational",
+        "predictedIntent": "relational",
+        "ndcg": 1,
+        "mrr": 1,
+        "recall": 1
+      }
+    ]
+  },
+  "comparison": [
+    {
+      "label": "weighted-default（文档起步值）",
+      "n": 25,
+      "ndcgAtK": 0.3938,
+      "mrr": 0.3767,
+      "recallAtK": 0.46
+    },
+    {
+      "label": "equal-weight（四路等权）",
+      "n": 25,
+      "ndcgAtK": 0.3745,
+      "mrr": 0.3667,
+      "recallAtK": 0.42
+    },
+    {
+      "label": "vector-only（纯向量）",
+      "n": 25,
+      "ndcgAtK": 0.4302,
+      "mrr": 0.3947,
+      "recallAtK": 0.6267
+    }
+  ],
+  "rrfK": [
+    {
+      "rrfK": 20,
+      "ndcgAtK": 0.4076,
+      "mrr": 0.3924,
+      "recallAtK": 0.46
+    },
+    {
+      "rrfK": 40,
+      "ndcgAtK": 0.4118,
+      "mrr": 0.4033,
+      "recallAtK": 0.46
+    },
+    {
+      "rrfK": 60,
+      "ndcgAtK": 0.3938,
+      "mrr": 0.3767,
+      "recallAtK": 0.46
+    },
+    {
+      "rrfK": 80,
+      "ndcgAtK": 0.3542,
+      "mrr": 0.34,
+      "recallAtK": 0.42
+    },
+    {
+      "rrfK": 100,
+      "ndcgAtK": 0.2985,
+      "mrr": 0.2857,
+      "recallAtK": 0.36
+    }
+  ],
+  "alpha": [
+    {
+      "alpha": 0,
+      "ndcgAtK": 0.3949,
+      "mrr": 0.3883,
+      "recallAtK": 0.46
+    },
+    {
+      "alpha": 0.15,
+      "ndcgAtK": 0.397,
+      "mrr": 0.3833,
+      "recallAtK": 0.46
+    },
+    {
+      "alpha": 0.25,
+      "ndcgAtK": 0.397,
+      "mrr": 0.3833,
+      "recallAtK": 0.46
+    },
+    {
+      "alpha": 0.4,
+      "ndcgAtK": 0.3766,
+      "mrr": 0.3667,
+      "recallAtK": 0.42
+    },
+    {
+      "alpha": 0.6,
+      "ndcgAtK": 0.3152,
+      "mrr": 0.3,
+      "recallAtK": 0.4
+    }
+  ],
+  "routeWeights": {
+    "halved": [
+      {
+        "intent": "factual",
+        "route": "vector",
+        "factor": 0.5,
+        "ndcg": 0.4086,
+        "delta": 0.0148
+      },
+      {
+        "intent": "factual",
+        "route": "fts",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "factual",
+        "route": "triple",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "factual",
+        "route": "recent",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "explanatory",
+        "route": "vector",
+        "factor": 0.5,
+        "ndcg": 0.3766,
+        "delta": -0.0172
+      },
+      {
+        "intent": "explanatory",
+        "route": "fts",
+        "factor": 0.5,
+        "ndcg": 0.3766,
+        "delta": -0.0172
+      },
+      {
+        "intent": "explanatory",
+        "route": "triple",
+        "factor": 0.5,
+        "ndcg": 0.3966,
+        "delta": 0.0028
+      },
+      {
+        "intent": "explanatory",
+        "route": "recent",
+        "factor": 0.5,
+        "ndcg": 0.3966,
+        "delta": 0.0028
+      },
+      {
+        "intent": "relational",
+        "route": "vector",
+        "factor": 0.5,
+        "ndcg": 0.3953,
+        "delta": 0.0015
+      },
+      {
+        "intent": "relational",
+        "route": "fts",
+        "factor": 0.5,
+        "ndcg": 0.3921,
+        "delta": -0.0017
+      },
+      {
+        "intent": "relational",
+        "route": "triple",
+        "factor": 0.5,
+        "ndcg": 0.4093,
+        "delta": 0.0155
+      },
+      {
+        "intent": "relational",
+        "route": "recent",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "vector",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "fts",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "triple",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "recent",
+        "factor": 0.5,
+        "ndcg": 0.3938,
+        "delta": 0
+      }
+    ],
+    "doubled": [
+      {
+        "intent": "factual",
+        "route": "vector",
+        "factor": 2,
+        "ndcg": 0.3886,
+        "delta": -0.0052
+      },
+      {
+        "intent": "factual",
+        "route": "fts",
+        "factor": 2,
+        "ndcg": 0.4086,
+        "delta": 0.0148
+      },
+      {
+        "intent": "factual",
+        "route": "triple",
+        "factor": 2,
+        "ndcg": 0.4086,
+        "delta": 0.0148
+      },
+      {
+        "intent": "factual",
+        "route": "recent",
+        "factor": 2,
+        "ndcg": 0.4086,
+        "delta": 0.0148
+      },
+      {
+        "intent": "explanatory",
+        "route": "vector",
+        "factor": 2,
+        "ndcg": 0.3966,
+        "delta": 0.0028
+      },
+      {
+        "intent": "explanatory",
+        "route": "fts",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "explanatory",
+        "route": "triple",
+        "factor": 2,
+        "ndcg": 0.3766,
+        "delta": -0.0172
+      },
+      {
+        "intent": "explanatory",
+        "route": "recent",
+        "factor": 2,
+        "ndcg": 0.3766,
+        "delta": -0.0172
+      },
+      {
+        "intent": "relational",
+        "route": "vector",
+        "factor": 2,
+        "ndcg": 0.4002,
+        "delta": 0.0064
+      },
+      {
+        "intent": "relational",
+        "route": "fts",
+        "factor": 2,
+        "ndcg": 0.4093,
+        "delta": 0.0155
+      },
+      {
+        "intent": "relational",
+        "route": "triple",
+        "factor": 2,
+        "ndcg": 0.3921,
+        "delta": -0.0017
+      },
+      {
+        "intent": "relational",
+        "route": "recent",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "vector",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "fts",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "triple",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      },
+      {
+        "intent": "temporal",
+        "route": "recent",
+        "factor": 2,
+        "ndcg": 0.3938,
+        "delta": 0
+      }
+    ]
+  },
+  "decayAB": [
+    {
+      "label": "fact=15d/pattern=75d",
+      "ndcgAtK": 0.3484,
+      "mrr": 0.3317,
+      "recallAtK": 0.42
+    },
+    {
+      "label": "fact=30d/pattern=75d（默认）",
+      "ndcgAtK": 0.3484,
+      "mrr": 0.3317,
+      "recallAtK": 0.42
+    },
+    {
+      "label": "fact=60d/pattern=75d",
+      "ndcgAtK": 0.3657,
+      "mrr": 0.3417,
+      "recallAtK": 0.46
+    },
+    {
+      "label": "fact=30d/pattern=40d",
+      "ndcgAtK": 0.3284,
+      "mrr": 0.3183,
+      "recallAtK": 0.38
+    },
+    {
+      "label": "fact=30d/pattern=120d",
+      "ndcgAtK": 0.3684,
+      "mrr": 0.3583,
+      "recallAtK": 0.42
+    }
+  ],
+  "overfetch": {
+    "rows": [
+      {
+        "domainVectors": 10,
+        "tableVectors": 120,
+        "share": 0.0833,
+        "k": 3,
+        "scannedPerCall": 84,
+        "returned": 3,
+        "waste": 28,
+        "pathACost": 3
+      },
+      {
+        "domainVectors": 10,
+        "tableVectors": 120,
+        "share": 0.0833,
+        "k": 5,
+        "scannedPerCall": 140,
+        "returned": 5,
+        "waste": 28,
+        "pathACost": 5
+      },
+      {
+        "domainVectors": 10,
+        "tableVectors": 120,
+        "share": 0.0833,
+        "k": 8,
+        "scannedPerCall": 216,
+        "returned": 8,
+        "waste": 27,
+        "pathACost": 8
+      },
+      {
+        "domainVectors": 30,
+        "tableVectors": 120,
+        "share": 0.25,
+        "k": 3,
+        "scannedPerCall": 12,
+        "returned": 3,
+        "waste": 4,
+        "pathACost": 3
+      },
+      {
+        "domainVectors": 30,
+        "tableVectors": 120,
+        "share": 0.25,
+        "k": 5,
+        "scannedPerCall": 20,
+        "returned": 5,
+        "waste": 4,
+        "pathACost": 5
+      },
+      {
+        "domainVectors": 30,
+        "tableVectors": 120,
+        "share": 0.25,
+        "k": 8,
+        "scannedPerCall": 32,
+        "returned": 8,
+        "waste": 4,
+        "pathACost": 8
+      },
+      {
+        "domainVectors": 80,
+        "tableVectors": 120,
+        "share": 0.6667,
+        "k": 3,
+        "scannedPerCall": 12,
+        "returned": 3,
+        "waste": 4,
+        "pathACost": 3
+      },
+      {
+        "domainVectors": 80,
+        "tableVectors": 120,
+        "share": 0.6667,
+        "k": 5,
+        "scannedPerCall": 20,
+        "returned": 5,
+        "waste": 4,
+        "pathACost": 5
+      },
+      {
+        "domainVectors": 80,
+        "tableVectors": 120,
+        "share": 0.6667,
+        "k": 8,
+        "scannedPerCall": 32,
+        "returned": 8,
+        "waste": 4,
+        "pathACost": 8
+      }
+    ],
+    "suggestion": "占比 ≤ 0.0833 的域会触发阶梯翻倍（扫描 216 行 vs 路径 A 的 k 行）→ 这类小域适合让 minPartitionVectors 兜底到路径 A；当前默认 50 是否够，取决于真实表总量（占比 = 域向量 / 全表）"
+  },
+  "vec": {
+    "available": true,
+    "refusal": null,
+    "vectors": 20000,
+    "queries": 20,
+    "k": 8,
+    "mem": {
+      "medianMs": 1.777,
+      "p95Ms": 2.11
+    },
+    "sqlite": {
+      "medianMs": 34.737,
+      "p95Ms": 42.571
+    },
+    "topKOverlap": 1,
+    "residentBytes": 33656400,
+    "speedup": 19.5481,
+    "verdict": "内存精确索引比 vec0 快 19.5481×（P50）。top-k 重叠 1——两者都是精确扫描，重叠率低于 1.0 就是 bug 不是精度差，先查 swap-remove 的 id→下标映射。"
+  },
+  "verified": {
+    "positives": 20,
+    "negatives": 39,
+    "truePositive": 15,
+    "falsePositive": 0,
+    "falsePositiveRate": 0,
+    "recallOnPositives": 0.75,
+    "triggerPer1000Turns": 254,
+    "pass": true,
+    "verdict": "误报 < 5% 且触发密度达标 → verifiedEnabled=true 维持"
+  },
+  "extractFidelity": {
+    "rows": [
+      {
+        "name": "新协议干净输出",
+        "ok": true,
+        "got": [
+          "用户喜欢喝美式咖啡"
+        ],
+        "moodUser": "joy"
+      },
+      {
+        "name": "代码围栏 + 前后废话",
+        "ok": true,
+        "got": [
+          "用户养了只猫叫煤球"
+        ],
+        "moodUser": null
+      },
+      {
+        "name": "思考混入（<think> 剥离，R-140）",
+        "ok": true,
+        "got": [
+          "用户养了一只猫"
+        ],
+        "moodUser": null
+      },
+      {
+        "name": "旧协议裸数组（mood 缺席 ≠ 平静）",
+        "ok": true,
+        "got": [
+          "用户每周五写周报"
+        ],
+        "moodUser": null
+      },
+      {
+        "name": "脏字段全部丢弃（LLM 幻觉不洗白）",
+        "ok": true,
+        "got": [
+          "用户在学 Rust"
+        ],
+        "moodUser": null
+      },
+      {
+        "name": "非法 entry_type 兜底 fact；缺 text 丢弃",
+        "ok": true,
+        "got": [
+          "用户讨厌香菜"
+        ],
+        "moodUser": null
+      },
+      {
+        "name": "全废输出（解析失败）= 零候选不炸",
+        "ok": true,
+        "got": [],
+        "moodUser": null
+      }
+    ],
+    "pass": 7,
+    "total": 7,
+    "passed": true,
+    "verdict": "清洗链全部保真"
+  },
+  "conflict": {
+    "rows": [
+      {
+        "name": "同三元组同值 = redundant（不新增）",
+        "ok": true,
+        "got": "redundant",
+        "expect": "redundant"
+      },
+      {
+        "name": "同三元组新值 = update（取代旧账）",
+        "ok": true,
+        "got": "update",
+        "expect": "update"
+      },
+      {
+        "name": "完全新事实 = new",
+        "ok": true,
+        "got": "new",
+        "expect": "new"
+      },
+      {
+        "name": "字面几乎全同（向量不够线）= literalJaccard 兜底 redundant",
+        "ok": true,
+        "got": "redundant",
+        "expect": "redundant"
+      },
+      {
+        "name": "同句式不同实体 = uncertain（实体锚定纪律：sim ∈ (0.80, 0.92) 且字面重叠 ≥2 才进确认池）",
+        "ok": true,
+        "got": "uncertain",
+        "expect": "uncertain"
+      }
+    ],
+    "pass": 5,
+    "total": 5,
+    "passed": true,
+    "verdict": "冲突裁决全部符合预期"
+  },
+  "privacy": {
+    "rows": [
+      {
+        "name": "normal 不受 origin 管控",
+        "ok": true,
+        "got": true,
+        "expect": true
+      },
+      {
+        "name": "private 同会话可见",
+        "ok": true,
+        "got": true,
+        "expect": true
+      },
+      {
+        "name": "private 跨会话隐藏",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "private 缺出身 = 拒（fail-closed）",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "owner 白名单 + 缺 viewer = 拒",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "owner 白名单 + viewer=dad 可见",
+        "ok": true,
+        "got": true,
+        "expect": true
+      },
+      {
+        "name": "owner 白名单 + viewer=他人 = 拒",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "shared 跨会话默认隐藏",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "shared 跨会话 + crossSession 开 = 可见",
+        "ok": true,
+        "got": true,
+        "expect": true
+      },
+      {
+        "name": "shared + 白名单 + 缺 viewer = 拒（nonOwnerSeesShared 关）",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "includePrivate 自报不是凭据（铁律①）",
+        "ok": true,
+        "got": false,
+        "expect": false
+      },
+      {
+        "name": "context(entryId) 不绕过准入（铁律②）",
+        "ok": true,
+        "got": false,
+        "expect": false
+      }
+    ],
+    "pass": 12,
+    "total": 12,
+    "passed": true,
+    "verdict": "隐私红线全部通过（无跨会话泄漏、无白名单绕过、无自报提权）"
+  }
+}

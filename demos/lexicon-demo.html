@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>词向量表 · 同义词发现 Demo</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0d1117; color: #e6edf3; font-family: system-ui, sans-serif; padding: 24px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #8b949e; font-size: 13px; margin-bottom: 18px; }
+  .grid { display: grid; grid-template-columns: 1fr 360px 300px; gap: 16px; align-items: start; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 14px; }
+  .card h2 { font-size: 14px; margin: 0 0 10px; color: #79c0ff; }
+  input[type=text] { width: 100%; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; padding: 8px 10px; font-size: 14px; }
+  button { background: #238636; color: #fff; border: none; border-radius: 6px; padding: 7px 12px; font-size: 13px; cursor: pointer; }
+  button.ghost { background: #21262d; border: 1px solid #30363d; }
+  button.mini { padding: 3px 8px; font-size: 12px; background: #21262d; border: 1px solid #30363d; color: #79c0ff; }
+  button:hover { filter: brightness(1.2); }
+  .nn-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; margin-bottom: 4px; background: #0d1117; }
+  .nn-row.hl { outline: 1px solid #238636; }
+  .bar-wrap { flex: 1; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+  .bar { height: 100%; background: linear-gradient(90deg, #1f6feb, #79c0ff); }
+  .sim { width: 52px; text-align: right; font-size: 12px; color: #8b949e; font-variant-numeric: tabular-nums; }
+  .word { width: 72px; font-weight: 600; }
+  .dict-item { display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #0d1117; border-radius: 6px; margin-bottom: 4px; font-size: 13px; }
+  .hint { color: #8b949e; font-size: 12px; line-height: 1.6; margin-top: 10px; }
+  textarea { width: 100%; min-height: 90px; background: #0d1117; color: #79c0ff; border: 1px solid #30363d; border-radius: 6px; font-family: monospace; font-size: 12px; padding: 8px; }
+  .noise-tag { color: #f85149; font-size: 11px; }
+  .ok-tag { color: #3fb950; font-size: 11px; }
+  svg { background: #0d1117; border-radius: 8px; }
+  .empty { color: #8b949e; font-size: 13px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<h1>词向量表 · 同义词发现 Demo</h1>
+<div class="sub">内置一个手工构造的迷你词向量空间（真实场景 = 50MB 预训练词表文件）。流程：<b>查近邻 → 人工确认 → 进词典 → 导出规范格式</b>。注意观察噪声样本（红色）——词向量近邻会混入反义词，这就是为什么需要人工这道闸。</div>
+
+<div class="grid">
+  <!-- 左：向量空间可视化 -->
+  <div class="card">
+    <h2>向量空间（2D 投影）</h2>
+    <svg id="space" width="100%" height="380" viewBox="0 0 480 380"></svg>
+    <div class="hint">颜色 = 语义簇。查询词（黄色圈）与近邻（绿框）的连线长度即余弦距离。红色词是故意放的<b>噪声</b>：它们和某些词距离很近但不是同义词。</div>
+  </div>
+
+  <!-- 中：近邻发现 -->
+  <div class="card">
+    <h2>近邻发现</h2>
+    <input type="text" id="q" placeholder="输入一个词，如：喜欢 / 喝 / 上班 / 爹" value="">
+    <div style="margin: 10px 0;"><button onclick="find()">找近邻（余弦 top8）</button></div>
+    <div id="nn"><div class="empty">输入词后点击查找。近邻即词向量空间里距离最近的词——它们就是词典候选。</div></div>
+    <div class="hint">相似度由余弦夹角计算（真实词表是 200~300 维，demo 简化为 2 维演示）。</div>
+  </div>
+
+  <!-- 右：词典 -->
+  <div class="card">
+    <h2>同义词典（确认池）</h2>
+    <div id="dict"></div>
+    <div class="hint">点近邻行的「+ 词典」把词加进组（自动归入该词所属的簇）。人工确认 = 过滤词向量的噪声。</div>
+    <div style="margin-top: 12px;"><button class="ghost" onclick="exportDict()">导出规范格式</button></div>
+    <textarea id="out" style="margin-top: 8px;" placeholder="点击导出后，把这里的内容贴进插件设置页的词典编辑框即可生效"></textarea>
+  </div>
+</div>
+
+<script>
+// ── 迷你词向量空间（手工构造的语义簇；真实场景 = 预训练词表文件）──
+const V = {
+  // 饮品簇（绿）
+  "喝":     [1.4, 2.7], "饮品":   [1.2, 2.9], "茶":     [1.2, 3.1], "咖啡":   [1.5, 2.9],
+  "矿泉水": [1.1, 3.4], "饮料":   [1.6, 3.2], "奶茶":   [1.3, 3.0],
+  // 偏好簇（绿偏右上）
+  "喜欢":   [2.2, 3.3], "偏好":   [2.4, 3.1], "爱":     [2.1, 3.5], "口味":   [2.5, 3.4], "偏爱":   [2.3, 3.6],
+  // 游戏簇（橙）
+  "玩":     [3.2, 0.8], "游戏":   [3.4, 1.0], "LOL":    [3.6, 0.7], "英雄联盟":[3.5, 1.2], "打":     [3.1, 1.1], "电竞":   [3.7, 0.9],
+  // 工作簇（蓝）
+  "上班":   [0.8, 0.6], "工作":   [1.0, 0.8], "排班":   [0.6, 0.9], "值班":   [1.2, 0.5], "加班":   [0.9, 0.4], "周日":   [1.3, 0.7],
+  // 称呼簇（紫）
+  "我":     [2.8, 2.2], "用户":   [3.0, 2.4], "爹":     [2.7, 2.5], "主人":   [3.1, 2.1],
+  // 遗忘簇（青）
+  "忘":     [4.2, 2.0], "忘记":   [4.4, 2.2], "删除":   [4.1, 2.3],
+  // 噪声演示（红）——近邻混入的反义/无关词
+  "热":     [1.7, 1.4], "冷":     [1.9, 1.5], "相机":   [0.5, 2.0],
+};
+
+const CLUSTER = {
+  "喝":"饮品","饮品":"饮品","茶":"饮品","咖啡":"饮品","矿泉水":"饮品","饮料":"饮品","奶茶":"饮品",
+  "喜欢":"偏好","偏好":"偏好","爱":"偏好","口味":"偏好","偏爱":"偏好",
+  "玩":"游戏","游戏":"游戏","LOL":"游戏","英雄联盟":"游戏","打":"游戏","电竞":"游戏",
+  "上班":"工作","工作":"工作","排班":"工作","值班":"工作","加班":"工作","周日":"工作",
+  "我":"称呼","用户":"称呼","爹":"称呼","主人":"称呼",
+  "忘":"遗忘","忘记":"遗忘","删除":"遗忘",
+  "热":"噪声","冷":"噪声","相机":"噪声",
+};
+const NOISE = new Set(["热", "冷", "相机"]);
+
+const COLORS = { "饮品":"#3fb950", "偏好":"#3fb950", "游戏":"#f0883e", "工作":"#58a6ff", "称呼":"#bc8cff", "遗忘":"#39c5cf", "噪声":"#f85149" };
+
+function cos(a, b) {
+  const [ax, ay] = V[a], [bx, by] = V[b];
+  const dot = ax*bx + ay*by, na = Math.hypot(ax, ay), nb = Math.hypot(bx, by);
+  return dot / (na * nb);
+}
+
+let dictGroups = [];   // [{ name, words: [] }]
+
+function renderSpace(hlWord, neighbors) {
+  const svg = document.getElementById("space");
+  const S = 95, OX = 20, OY = 350;   // 坐标缩放
+  const px = (v) => [OX + v[0] * S, OY - v[1] * S];
+  const nnSet = new Map(neighbors ?? []);
+  let g = "";
+  for (const [w, v] of Object.entries(V)) {
+    const [x, y] = px(v);
+    const isQ = w === hlWord, nn = nnSet.get(w);
+    const c = NOISE.has(w) ? COLORS["噪声"] : (COLORS[CLUSTER[w]] ?? "#8b949e");
+    g += `<circle cx="${x}" cy="${y}" r="${isQ ? 9 : (nn ? 7 : 5)}" fill="${c}" ${isQ ? 'stroke="#ffd333" stroke-width="2"' : ''} opacity="${nn || isQ ? 1 : 0.45}"/>`;
+    g += `<text x="${x}" y="${y - 10}" text-anchor="middle" font-size="11" fill="${nn || isQ ? '#e6edf3' : '#8b949e'}">${w}</text>`;
+    if (nn && nnSet.has(w)) g += `<line x1="${px(V[hlWord])[0]}" y1="${px(V[hlWord])[1]}" x2="${x}" y2="${y}" stroke="#ffd333" stroke-width="1" stroke-dasharray="3,2"/>`;
+  }
+  svg.innerHTML = g;
+}
+
+function find() {
+  const q = document.getElementById("q").value.trim();
+  if (!q || !V[q]) { document.getElementById("nn").innerHTML = `<div class="empty">词表里没有「${q}」——真实词表几十万词，生词漏词是它相对真模型的短板。</div>`; renderSpace(q, []); return; }
+  const nns = Object.keys(V).filter((w) => w !== q)
+    .map((w) => ({ w, sim: cos(q, w) }))
+    .sort((a, b) => b.sim - a.sim).slice(0, 8);
+  renderSpace(q, nns);
+  document.getElementById("nn").innerHTML = nns.map(({ w, sim }) => {
+    const noise = NOISE.has(w);
+    const group = dictGroups.find((g) => g.words.includes(q));
+    return `<div class="nn-row ${''}">
+      <span class="word">${w}</span>
+      <div class="bar-wrap"><div class="bar" style="width:${Math.round(Math.max(0, sim) * 100)}%"></div></div>
+      <span class="sim">${Math.round(Math.max(0, sim) * 100)}%</span>
+      <button class="mini" onclick="addWord('${w}', '${q}')">+ 词典</button>
+      ${noise ? '<span class="noise-tag">噪声?</span>' : `<span class="ok-tag">${CLUSTER[w]}</span>`}
+    </div>`;
+  }).join("");
+}
+
+function addWord(w, fromQ) {
+  // 归组：优先“查询词所在组”，否则按簇名建新组
+  let g = dictGroups.find((grp) => grp.words.includes(fromQ) || grp.words.includes(w));
+  if (!g) { g = { name: CLUSTER[fromQ] ?? CLUSTER[w] ?? "未分组", words: [] }; dictGroups.push(g); }
+  if (!g.words.includes(w)) g.words.push(w);
+  if (!g.words.includes(fromQ)) g.words.push(fromQ);
+  renderDict();
+}
+
+function removeWord(w) {
+  for (const g of dictGroups) g.words = g.words.filter((x) => x !== w);
+  dictGroups = dictGroups.filter((g) => g.words.length >= 2);
+  renderDict();
+}
+
+function renderDict() {
+  const el = document.getElementById("dict");
+  el.innerHTML = dictGroups.length
+    ? dictGroups.map((g, i) => `<div class="dict-item"><span><b>${g.name}</b>：${g.words.join("、")}</span><button class="mini" onclick="undo(${i})">↩ 撤销本组</button></div>`).join("")
+    : `<div class="empty">空——从中间的近邻列表里挑词加进来。</div>`;
+}
+
+let lastSnapshot = null;
+function undo(i) { /* 简化：重导出前的快照撤销留给正式实现 */ renderDict(); }
+
+function exportDict() {
+  const lines = dictGroups.filter((g) => g.words.length >= 2).map((g) => g.words.join(", "));
+  document.getElementById("out").value = lines.join("\n");
+}
+
+renderSpace(null, []);
+renderDict();
+</script>
+</body>
+</html>
